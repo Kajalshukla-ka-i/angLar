@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angularApp": {
+    "AngularApp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -25,7 +25,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -51,7 +52,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -60,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angularApp:build:production"
+              "browserTarget": "AngularApp:build:production"
             },
             "development": {
-              "browserTarget": "angularApp:build:development"
+              "browserTarget": "AngularApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angularApp:build"
+            "browserTarget": "AngularApp:build"
           }
         },
         "test": {
@@ -96,6 +103,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "1727b777-4ef5-4605-bf4c-64a5fc9f360e"
   }
 }

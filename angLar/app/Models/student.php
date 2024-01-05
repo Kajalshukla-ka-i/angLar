@@ -12,4 +12,8 @@ class student extends Model
     public function getStudent(){
         return DB::table('student')->get();
     }
+    public function addStudent($data){
+        $result =  DB::table('student')->insert($data);
+        return $result;
+    }
 }
