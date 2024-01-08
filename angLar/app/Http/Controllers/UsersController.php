@@ -36,5 +36,24 @@ class UsersController extends Controller
         // dd($usersview);
 
     }
+    public function deleteDta(Request $req){
+        // dd($req);
+        $id=$req->id;
+        $mess = array();
+        $users = new student();
+        $result = $users->deleteStudent($id);
+        // return $usersview;
+        if($result){
+            $mess['code'] = 1;
+            $mess['message'] = 'Details Deleted Successfully !';
+        }else{
+            $mess['code'] = 2;
+            $mess['message'] = 'Error While deleting Please Try Again !';
+        }
+
+        return response()->json($mess);
+        // dd($usersview);
+
+    }
 }
 

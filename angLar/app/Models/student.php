@@ -16,4 +16,9 @@ class student extends Model
         $result =  DB::table('student')->insert($data);
         return $result;
     }
+
+    public function deleteStudent($id){
+        $result = DB::table('student')->where('id',$id)->delete();
+        return $result;
+    }
 }

@@ -1,43 +1,57 @@
 <div class="container">
-<div [innerHTML]="target"></div>
-    <form #userForm="ngForm" (ngSubmit)="add_Student()">
-        <div class="col-md-4">
-            <label for="inputName4" class="form-label">Name</label>
-            <input type="text" pattern="[a-zA-Z]+$" class="form-control" #userName="ngModel" name="name" [(ngModel)]="userobj.name" required>
-        </div>
-        <span *ngIf="userName.invalid && userName.touched && !userForm.submitted" style="color: red;">Please Enter a Valid Name</span>
-        <div class="col-md-4">
-            <label for="inputClass4" class="form-label">Class</label>
-            <input type="text" class="form-control" #userClass="ngModel" name="class" [(ngModel)]="userobj.class" required pattern="[0-9]+$" >
-        </div>
-        <span *ngIf="userClass.invalid && userClass.touched" style="color: red;">Please Enter a Valid Class</span>
-        <div class="col-md-4">
-            <label for="inputEmail4" class="form-label">Email</label>
-            <input type="email" class="form-control" #userEmail="ngModel" name="email" [(ngModel)]="userobj.email" required  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
-        </div>
-        <span *ngIf="userEmail.invalid && userEmail.touched" style="color: red;">Please Enter a Valid Email</span>
-        
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Add Student</button>
-        </div>
-    </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Class</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let st of api_value">
-                <td>{{st.id}}</td>
-                <td>{{st.name}}</td>
-                <td>{{st.class}}</td>
-                <td>{{st.email}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div [innerHTML]="target"></div>
+    <div class="row">
+        <div class="col-md-8">
+            <form #userForm="ngForm" (ngSubmit)="add_Student()">
+                <div class="col-md-4">
+                    <label for="inputName4" class="form-label">Name</label>
+                    <input type="text" pattern="[a-zA-Z]+$" class="form-control" #userName="ngModel" name="name"
+                        [(ngModel)]="userobj.name" required>
+                </div>
+                <span *ngIf="userName.invalid && userName.touched && !userForm.submitted" style="color: red;">Please
+                    Enter a Valid Name</span>
+                <div class="col-md-4">
+                    <label for="inputClass4" class="form-label">Class</label>
+                    <input type="text" class="form-control" #userClass="ngModel" name="class"
+                        [(ngModel)]="userobj.class" required pattern="[0-9]+$">
+                </div>
+                <span *ngIf="userClass.invalid && userClass.touched && !userForm.submitted" style="color: red;">Please Enter a Valid
+                    Class</span>
+                <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input type="email" class="form-control" #userEmail="ngModel" name="email"
+                        [(ngModel)]="userobj.email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
+                </div>
+                <span *ngIf="userEmail.invalid && userEmail.touched && !userForm.submitted" style="color: red;">Please Enter a Valid
+                    Email</span>
 
+                <div class="col-md-4" style="float: right; margin-top: -11px;">
+                    <button type="submit"  style="margin-top: -88px;" class="btn btn-primary">Add Student</button>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="col-md-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let st of api_value">
+                        <td>{{st.id}}</td>
+                        <td>{{st.name}}</td>
+                        <td>{{st.class}}</td>
+                        <td>{{st.email}}</td>
+                        <td><button class="btn btn-danger" (click)="delete_data(st.id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

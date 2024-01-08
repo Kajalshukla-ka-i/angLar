@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 export class UserDataService {
   userData:any;
   
-  private API_URL = (environment as any).API_URL;
+  private API_URL = 'http://127.0.0.1:8000/';//(environment as any).API_URL;
 
   constructor(private httpRequest:HttpClient) { }
   getUserData(){
@@ -29,5 +29,9 @@ export class UserDataService {
   }
   AddDataFromAPI(data:any){
     return this.httpRequest.post(this.API_URL +'add_users',data);
+  }
+
+  DeleteDataFromAPI(id:any){
+    return this.httpRequest.delete(this.API_URL +'delete_users/'+ id);
   }
 }
