@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { Users } from './users.modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class UserComponent implements OnInit {
   api_value: any;
   target: string = '';
   userobj = new Users()
-  constructor(private userdata: UserDataService) { }
+  constructor(private userdata: UserDataService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.user_value = this.userdata.getUserData();
@@ -31,7 +32,11 @@ export class UserComponent implements OnInit {
 
   add_Student() {
     // console.log(this.userobj);
+    this.spinner.show();
     this.userdata.AddDataFromAPI(this.userobj).subscribe((response: any) => {
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 1000);
       this.showAPIDATA();//refresh data
       this.userobj.name = '';
       this.userobj.class = '';
