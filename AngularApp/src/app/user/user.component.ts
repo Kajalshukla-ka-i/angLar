@@ -33,6 +33,13 @@ export class UserComponent implements OnInit {
   add_Student() {
     // console.log(this.userobj);
     this.spinner.show();
+    if (this.userobj.name == undefined || this.userobj.class == undefined || this.userobj.email == undefined) {
+      this.target = '<div class="alert alert-danger"> Please Enter the detail !!</div>'
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 1000);
+      return;
+    }
     this.userdata.AddDataFromAPI(this.userobj).subscribe((response: any) => {
       setTimeout(() => {
         this.spinner.hide();
@@ -51,9 +58,14 @@ export class UserComponent implements OnInit {
   }
 
   delete_data(id: any) {
+
     var c = confirm('Are you sure you want to delete this record ?');
     if (c) {
+      this.spinner.show();
       this.userdata.DeleteDataFromAPI(id).subscribe((response: any) => {
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 1000);
         console.log('delete successful');
         this.showAPIDATA();
         console.log(response);

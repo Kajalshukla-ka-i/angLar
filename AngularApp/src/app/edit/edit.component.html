@@ -3,7 +3,7 @@
     <div [innerHTML]="target"></div>
     <div class="row">
         <div class="col-md-8">
-            <form #userForm="ngForm" (ngSubmit)="add_Student()">
+            <form #userForm="ngForm" (ngSubmit)="update_Student()">
                 <div class="col-md-4">
                     <label for="inputName4" class="form-label">Name</label>
                     <input type="text" pattern="[a-zA-Z]+$" class="form-control" #userName="ngModel" name="name"
@@ -29,37 +29,9 @@
                     Email</span>
 
                 <div class="col-md-4" style="float: right; margin-top: -11px;">
-                    <button type="submit" style="margin-top: -88px;" class="btn btn-primary">Add Student</button>
+                    <button type="submit" style="margin-top: -88px;" class="btn btn-primary">Update Student</button>
                 </div>
             </form>
         </div>
-        <hr>
-        <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
-
-        <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Class</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let st of api_value">
-                        <td>{{st.id}}</td>
-                        <td>{{st.name}}</td>
-                        <td>{{st.class}}</td>
-                        <td>{{st.email}}</td>
-                        <td>
-                            <button class="btn btn-danger" (click)="delete_data(st.id)">Delete</button>
-                            <button class="btn btn-primary mx-2" routerLink="edit/{{st.id}}">Edit</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+          </div>
 </div>

@@ -24,3 +24,6 @@ Route::get('users',[UsersController::class,'show']);
 Route::get('users_vew',[UsersController::class,'getDta']);
 Route::post('add_users',[UsersController::class,'addDta']);
 Route::delete(('delete_users/{id}'),[UsersController::class,'deleteDta']);
+// edit
+Route::get(('edit_users/{id}'),[UsersController::class,'editDta']);
+Route::patch(('update_users/{id}'),[UsersController::class,'updateDta']); // end

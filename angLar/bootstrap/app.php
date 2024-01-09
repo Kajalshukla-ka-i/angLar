@@ -12,7 +12,7 @@
 */
 
  header('Access-Control-Allow-origin: *');
- header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+ header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE, PATCH');
  header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');
 
 $app = new Illuminate\Foundation\Application(

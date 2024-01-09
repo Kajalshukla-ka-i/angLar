@@ -21,4 +21,14 @@ class student extends Model
         $result = DB::table('student')->where('id',$id)->delete();
         return $result;
     }
+
+    public function geteditStudent($id){
+        $result =  DB::table('student')->select('name','class','email','id')->where('id',$id)->get()->first();
+        return $result;
+    }
+
+    public function updateStudent($id,$data){
+        $result =  DB::table('student')->where('id',$id)->update($data);
+        return $result;
+    }
 }
