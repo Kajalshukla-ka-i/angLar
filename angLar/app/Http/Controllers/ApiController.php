@@ -75,8 +75,10 @@ class ApiController extends Controller
         return response()->json([
             'success' => true,
             'token' => $token,
+            'message'=> 'Login Successfully',
+            'code'=>1,
             'userDetails' => $credenctials['email']
-        ],400);
+        ]);
 
     }
 
