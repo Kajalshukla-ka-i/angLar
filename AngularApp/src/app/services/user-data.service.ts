@@ -42,4 +42,8 @@ export class UserDataService {
   UpdateDataFromAPI(id:any,data:any){
     return this.httpRequest.patch(this.API_URL +'update_users/'+id, data);
   }
+
+  RegisterDataFromAPI(data:any){
+    return this.httpRequest.post(this.API_URL +'api/register',data);
+  }
 }

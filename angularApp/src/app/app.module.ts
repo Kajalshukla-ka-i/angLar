@@ -9,13 +9,17 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EditComponent } from './edit/edit.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    EditComponent
+    EditComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
