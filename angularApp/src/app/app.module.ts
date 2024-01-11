@@ -11,6 +11,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EditComponent } from './edit/edit.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { LoginComponent } from './login/login.component';
     NgxSpinnerModule
 
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

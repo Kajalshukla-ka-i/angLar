@@ -10,15 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private spinner:NgxSpinnerService, private userdata:UserDataService, private route:Router){}
+  constructor(private spinner: NgxSpinnerService, private userdata: UserDataService, private route: Router) { }
 
   loginobj = new Login;
-  target:string='';
+  target: string = '';
+  token: any;
 
   ngOnInit(): void {
   }
 
-  login_data(){
+  login_data() {
     this.spinner.show();
     if (this.loginobj.email == undefined || this.loginobj.password == undefined) {
       this.target = '<div class="alert alert-danger"> Please Enter the detail !!</div>'
@@ -37,9 +38,9 @@ export class LoginComponent {
       this.loginobj.password = '';
       console.log(response);
       if (response.code == 1) {
+        this.token = localStorage.setItem('token', response.code.token);
         this.target = '<div class="alert alert-success"> ' + response.message + '</div>';
-
-        this.route.navigate(['/']);
+        this.route.navigate(['/users']);
       } else if (response.code == 2) {
         this.target = '<div class="alert alert-warning"> ' + response.message + '</div>'
       }
