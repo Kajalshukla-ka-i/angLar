@@ -12,7 +12,13 @@ import { EditComponent } from './edit/edit.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  // ... your other routes
+  { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
+  // ... other routes
+];
 
 @NgModule({
   declarations: [
@@ -28,11 +34,14 @@ import { AuthGuard } from './auth.guard';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule.forRoot(routes)
 
   ],
   providers: [AuthGuard],
+  exports: [RouterModule],
+
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
