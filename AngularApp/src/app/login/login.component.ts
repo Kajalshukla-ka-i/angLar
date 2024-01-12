@@ -14,7 +14,7 @@ export class LoginComponent {
 
   loginobj = new Login;
   target: string = '';
-  token: any;
+  value: any;
 
   ngOnInit(): void {
   }
@@ -38,8 +38,10 @@ export class LoginComponent {
       this.loginobj.password = '';
       console.log(response);
       if (response.code == 1) {
-        this.token = localStorage.setItem('token', response.code.token);
+        // this.token = localStorage.setItem('token', response.code.token);
         this.target = '<div class="alert alert-success"> ' + response.message + '</div>';
+        this.value = localStorage.setItem('token', response.success);
+        // console.log(this.token)
         this.route.navigate(['/users']);
       } else if (response.code == 2) {
         this.target = '<div class="alert alert-warning"> ' + response.message + '</div>'
