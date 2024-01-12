@@ -21,10 +21,10 @@ export class AuthGuard implements CanActivate {
       // const userRole = localStorage.getItem('userRole');
 
       // Your authorization logic here
-      if (isLoggedIn === 'true') {
+      if (isLoggedIn) {
         // console.log('true');
-        this.router.navigate(['/users']);
-        // return true;
+        // this.router.navigate(['/users']);
+        return true;
       }
     }
 

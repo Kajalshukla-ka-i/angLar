@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Users } from '../user/users.modal';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDataService {
   userData: any;
-
-  private API_URL = 'http://127.0.0.1:8000/';//(environment as any).API_URL;
+  tokenval: any = localStorage.getItem('token');
+  private API_URL = 'http://127.0.0.1:8000/api/';//(environment as any).API_URL;
 
   constructor(private httpRequest: HttpClient) { }
+  currentToken = this.tokenval !== null ? this.tokenval : new Users();
+
+  header = new HttpHeaders({
+     'Authorization ': "Bearer " + this.currentToken,
+     'token' : this.currentToken,
+  })
   getUserData() {
     return this.userData = [
       {
@@ -25,7 +32,7 @@ export class UserDataService {
   }
 
   getDataFromAPI() {
-    return this.httpRequest.get(this.API_URL + 'users_vew');
+    return this.httpRequest.get(this.API_URL + 'users_vew',{headers :this.header});
   }
   AddDataFromAPI(data: any) {
     return this.httpRequest.post(this.API_URL + 'add_users', data);
