@@ -44,7 +44,9 @@ export class UserDataService {
   }
 
   DeleteDataFromAPI(id: any) {
-    return this.httpRequest.delete(this.API_URL + 'delete_users/' + id);
+    return this.httpRequest.delete(this.API_URL + 'api/delete_users/' + id,{
+      headers:this.header
+    });
   }
 
   GetEditDataFromAPI(id: any) {

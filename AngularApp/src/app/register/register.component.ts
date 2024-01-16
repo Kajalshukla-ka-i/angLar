@@ -24,7 +24,7 @@ export class RegisterComponent {
   register_data() {
     // console.log(this.userobj);
     this.spinner.show();
-    if (this.registerobj.name == undefined || this.registerobj.email == undefined || this.registerobj.password == undefined) {
+    if (this.registerobj.name == undefined || this.registerobj.email == undefined || this.registerobj.password == undefined || this.registerobj.contact == undefined || this.registerobj.class == undefined ) {
       this.target = '<div class="alert alert-danger"> Please Enter the detail !!</div>'
       setTimeout(() => {
         this.spinner.hide();
@@ -39,6 +39,8 @@ export class RegisterComponent {
       this.registerobj.name = '';
       this.registerobj.email = '';
       this.registerobj.password = '';
+      this.registerobj.class = '';
+      this.registerobj.contact = '';
       console.log(response);
       if (response.code == 1) {
         this.target = '<div class="alert alert-success"> ' + response.message + '</div>'

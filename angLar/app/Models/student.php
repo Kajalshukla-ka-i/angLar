@@ -14,6 +14,7 @@ class Student extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'email',
         'class',
         'contact'
     ];
@@ -59,5 +60,15 @@ class Student extends Model
             echo $ex->getMessage();
             return false;
         }
+    }
+
+    public function deleteStudent($id)
+    {
+        $result1 = DB::table('users')->where('id', $id)->delete();
+        $result2 = DB::table('students')->where('user_id', $id)->delete();
+        if($result1 && $result2){
+            return true;
+        }
+        // return $result;
     }
 }

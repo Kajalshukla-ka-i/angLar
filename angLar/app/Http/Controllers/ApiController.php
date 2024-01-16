@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Response;
@@ -17,70 +18,86 @@ class ApiController extends Controller
 
     public function register(Request $req)
     {
-        $data = $req->only('name' ,'email' ,'password');
+        $data = $req->only('name', 'email', 'password', 'class', 'contact');
         $validator =  Validator::make($data, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6',
+            'contact' => 'required|min:10',
+            'class' => 'required'
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors() ], 200);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
         $user = User::create([
             'name' => $req->name,
             'email' => $req->email,
-            'password' => bcrypt($req->password) 
+            'password' => bcrypt($req->password)
         ]);
+
         if ($user) {
-            return response()->json([
-                'success' => true,
-                'code'=>1,
-                'message' => 'Users Created Successfully',
-                'data' => $user
-            ], Response::HTTP_OK);
+
+            $student = Student::create([
+                'user_id' => $user->id,
+                'email' => $req->email,
+                'class' => $req->class,
+                'contact' => $req->contact,
+                // 'password' => bcrypt($req->password) 
+            ]);
+
+            if ($student) {
+                return response()->json([
+                    'success' => true,
+                    'code' => 1,
+                    'message' => 'Users Created Successfully',
+                    'data' => $user
+                ], Response::HTTP_OK);
+            }
+            // return response()->json([
+            //     'success' => true,
+            //     'code'=>1,
+            //     'message' => 'Users Created Successfully',
+            //     'data' => $user
+            // ], Response::HTTP_OK);
         }
     }
 
-    public function login(Request $req){
+    public function login(Request $req)
+    {
 
         $credenctials = $req->only('email', 'password');
 
 
-        $validator = Validator::make($credenctials,[
+        $validator = Validator::make($credenctials, [
             'email' => 'required|email',
-            'password'=> 'required|string|min:6'
+            'password' => 'required|string|min:6'
         ]);
 
-        if($validator->fails()){
-            return response()->json(['error' => $validator->errors() ], 200);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
-        try{
-            if(! $token = JWTAuth::attempt($credenctials)){
+        try {
+            if (!$token = JWTAuth::attempt($credenctials)) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Login Credencials are invalid',
-                ],400);
-
+                ], 400);
             }
-        }catch(JWTException $e){
+        } catch (JWTException $e) {
             return $credenctials;
             return response()->json([
                 'success' => false,
                 'message' => 'Could not create token',
-            ],400);
-
+            ], 400);
         }
         return response()->json([
             'success' => true,
             'token' => $token,
-            'message'=> 'Login Successfully',
-            'code'=>1,
+            'message' => 'Login Successfully',
+            'code' => 1,
             'userDetails' => $credenctials['email']
         ]);
-
     }
-
-
 }

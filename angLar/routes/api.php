@@ -29,6 +29,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::get('users_vew',[StudentController::class,'getDta']);
     // Route::post('add_users',[UsersController::class,'addDta']);
+    Route::delete(('delete_users/{id}'),[StudentController::class,'deleteDta']);
     
     // to edit
     Route::get(('edit_users/{id}'), [StudentController::class, 'editDta']);

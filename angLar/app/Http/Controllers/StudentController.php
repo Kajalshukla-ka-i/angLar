@@ -45,7 +45,8 @@ class StudentController extends Controller
         $usersview = $student->getStudent();
         return $usersview;
     }
-    public function editDta(Request $req){
+    public function editDta(Request $req)
+    {
         $users = new student();
         $id = $req->id;
         $usersview = $users->geteditStudent($id);
@@ -53,19 +54,42 @@ class StudentController extends Controller
         return response()->json($usersview);
     }
 
-    public function updateDta(Request $req){
+    public function updateDta(Request $req)
+    {
         // dd($req);
         $mess = array();
         $id = $req->id;
         $users = new student();
-        $result = $users->updateStudent($id,$req->all());
+        $result = $users->updateStudent($id, $req->all());
         // return $usersview;
-        if($result){
+        if ($result) {
             $mess['code'] = 1;
             $mess['message'] = 'Details Updated Successfully !';
-        }else{
+        } else {
             $mess['code'] = 2;
             $mess['message'] = 'Error While updating Please Try Again !';
+        }
+
+        return response()->json($mess);
+        // dd($usersview);
+
+    }
+
+
+    public function deleteDta(Request $req)
+    {
+        // dd($req);
+        $id = $req->id;
+        $mess = array();
+        $users = new student();
+        $result = $users->deleteStudent($id);
+        // return $usersview;
+        if ($result) {
+            $mess['code'] = 1;
+            $mess['message'] = 'Details Deleted Successfully !';
+        } else {
+            $mess['code'] = 2;
+            $mess['message'] = 'Error While deleting Please Try Again !';
         }
 
         return response()->json($mess);
