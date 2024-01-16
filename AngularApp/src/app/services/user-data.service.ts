@@ -9,15 +9,20 @@ import { Users } from '../user/users.modal';
 export class UserDataService {
   userData: any;
   tokenval: any = localStorage.getItem('token');
-  private API_URL = 'http://127.0.0.1:8000/api/';//(environment as any).API_URL;
+  private API_URL = 'http://127.0.0.1:8000/';//(environment as any).API_URL;
 
   constructor(private httpRequest: HttpClient) { }
   currentToken = this.tokenval !== null ? this.tokenval : new Users();
 
-  header = new HttpHeaders({
-     'Authorization ': "Bearer " + this.currentToken,
-     'token' : this.currentToken,
-  })
+  // header = new HttpHeaders({
+  //    'Authorization ': "Bearer " + this.currentToken,
+  //    'token' : this.currentToken,
+  // })
+
+   header = new HttpHeaders({
+    'Authorization': 'Bearer ' + this.currentToken,
+    // other headers...
+  });
   getUserData() {
     return this.userData = [
       {
@@ -32,7 +37,7 @@ export class UserDataService {
   }
 
   getDataFromAPI() {
-    return this.httpRequest.get(this.API_URL + 'users_vew',{headers :this.header});
+    return this.httpRequest.get(this.API_URL + 'api/users_vew',{headers :this.header});
   }
   AddDataFromAPI(data: any) {
     return this.httpRequest.post(this.API_URL + 'add_users', data);
@@ -43,11 +48,15 @@ export class UserDataService {
   }
 
   GetEditDataFromAPI(id: any) {
-    return this.httpRequest.get(this.API_URL + 'edit_users/' + id);
+    return this.httpRequest.get(this.API_URL + 'api/edit_users/' + id,{
+      headers:this.header
+    });
   }
 
   UpdateDataFromAPI(id: any, data: any) {
-    return this.httpRequest.patch(this.API_URL + 'update_users/' + id, data);
+    return this.httpRequest.patch(this.API_URL + 'api/update_users/' + id, data,{
+      headers:this.header
+    });
   }
 
   RegisterDataFromAPI(data: any) {

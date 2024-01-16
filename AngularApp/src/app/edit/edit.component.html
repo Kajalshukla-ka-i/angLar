@@ -19,6 +19,14 @@
                 <span *ngIf="userClass.invalid && userClass.touched && !userForm.submitted" style="color: red;">Please
                     Enter a Valid
                     Class</span>
+                    <div class="col-md-4">
+                        <label for="inputClass4" class="form-label">Contact</label>
+                        <input type="text" class="form-control" #userClass="ngModel" name="Contact"
+                            [(ngModel)]="userobj.contact" required pattern="[0-9]+$">
+                    </div>
+                    <span *ngIf="userClass.invalid && userClass.touched && !userForm.submitted" style="color: red;">Please
+                        Enter a Valid
+                        Class</span>
                 <div class="col-md-4">
                     <label for="inputEmail4" class="form-label">Email</label>
                     <input type="email" class="form-control" #userEmail="ngModel" name="email"

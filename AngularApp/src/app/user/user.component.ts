@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
   add_Student() {
     // console.log(this.userobj);
     this.spinner.show();
-    if (this.userobj.name == undefined || this.userobj.class == undefined || this.userobj.email == undefined) {
+    if (this.userobj.name == undefined || this.userobj.class == undefined || this.userobj.email == undefined || this.userobj.contact == undefined) {
       this.target = '<div class="alert alert-danger"> Please Enter the detail !!</div>'
       setTimeout(() => {
         this.spinner.hide();
@@ -48,6 +48,7 @@ export class UserComponent implements OnInit {
       this.userobj.name = '';
       this.userobj.class = '';
       this.userobj.email = '';
+      this.userobj.contact = '';
       console.log(response);
       if (response.code == 1) {
         this.target = '<div class="alert alert-success"> ' + response.message + '</div>'
