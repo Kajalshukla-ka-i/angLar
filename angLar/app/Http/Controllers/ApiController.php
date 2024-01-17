@@ -100,4 +100,30 @@ class ApiController extends Controller
             'userDetails' => $credenctials['email']
         ]);
     }
+
+    public function logout(Request $req)
+    {
+        if (empty($req->token)) {
+            return response()->json([
+                'success' => false,
+                'code' => 2,
+                'message' => 'Token is required'
+            ]);
+        }
+
+        try {
+            JWTAuth::invalidate($req->token);
+            return response()->json([
+                'success' => true,
+                'code' => 1,
+                'message' => 'User has been logged out'
+            ]);
+        } catch (JWTException $exception) {
+            return response()->json([
+                'success' => false,
+                'code' => 2,
+                'message' => 'Sorry user cannot be logged out'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

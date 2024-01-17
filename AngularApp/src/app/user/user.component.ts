@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { Users } from './users.modal';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,17 +15,22 @@ export class UserComponent implements OnInit {
   api_value: any;
   target: string = '';
   userobj = new Users()
-  constructor(private userdata: UserDataService, private spinner: NgxSpinnerService) { }
+  constructor(private userdata: UserDataService, private spinner: NgxSpinnerService, private route: Router) { }
 
   ngOnInit(): void {
-    this.user_value = this.userdata.getUserData();
+    // this.user_value = this.userdata.getUserData();
     //  console.log(this.user_value);
 
     this.showAPIDATA();
   }
 
   showAPIDATA() {
-    this.userdata.getDataFromAPI().subscribe(res => {
+    this.userdata.getDataFromAPI(this.userobj).subscribe(res => {
+      console.log(res);
+      this.api_value = res;
+    })
+
+    this.userdata.getFromAPI().subscribe(res => {
       console.log(res);
       this.api_value = res;
     })
@@ -80,4 +86,30 @@ export class UserComponent implements OnInit {
 
   }
 
+  logoutUser() {
+
+    var c = confirm('Are you sure you want to Logout  ?');
+    if (c) {
+      this.spinner.show();
+      this.userdata.LogoutDataFromAPI(localStorage.getItem('token')).subscribe((response: any) => {
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 1000);
+        console.log('delete successful');
+        // this.showAPIDATA();
+        console.log(response);
+        if (response.code == 1) {
+          localStorage.removeItem('token');
+          this.route.navigate(['/login']);
+        } else if (response.code == 2) {
+          this.target = '<div class="alert alert-warning">' + response.message + '</div>'
+        }
+      });
+    }
+
+  }
+
+  searchUser(){
+    this.showAPIDATA();
+  }
 }

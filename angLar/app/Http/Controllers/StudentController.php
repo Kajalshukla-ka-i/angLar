@@ -41,9 +41,22 @@ class StudentController extends Controller
     }
     public function getDta()
     {
-        $student = new student();
-        $usersview = $student->getStudent();
+        // $search = $req->search;
+        $studentModel = new student();
+        // $data = $studentModel->getStudent($search);
+        // return response()->json($data);
+        $usersview = $studentModel->getStudent();
         return $usersview;
+    }
+    
+    public function getData(Request $req)
+    {
+        $search = $req->search;
+        $studentModel = new student();
+        $data = $studentModel->getStudent($search);
+        return response()->json($data);
+        // $usersview = $student->getStudent();
+        // return $usersview;
     }
     public function editDta(Request $req)
     {

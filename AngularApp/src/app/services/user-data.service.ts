@@ -19,7 +19,7 @@ export class UserDataService {
   //    'token' : this.currentToken,
   // })
 
-   header = new HttpHeaders({
+  header = new HttpHeaders({
     'Authorization': 'Bearer ' + this.currentToken,
     // other headers...
   });
@@ -36,28 +36,46 @@ export class UserDataService {
     ];
   }
 
-  getDataFromAPI() {
-    return this.httpRequest.get(this.API_URL + 'api/users_vew',{headers :this.header});
+  getFromAPI() {
+    // this.tokenval = localStorage.getItem('token');
+    // this.header = new HttpHeaders({
+    //   'Authorization': `Bearer ${this.tokenval}`,
+    // });
+
+    return this.httpRequest.get(this.API_URL + 'api/users_vew', {
+      headers: this.header
+    });
+  }
+
+  getDataFromAPI(data: any) {
+    this.tokenval = localStorage.getItem('token');
+    this.header = new HttpHeaders({
+      'Authorization': `Bearer ${this.tokenval}`,
+    });
+
+    return this.httpRequest.post(this.API_URL + 'api/student', data, {
+      headers: this.header
+    });
   }
   AddDataFromAPI(data: any) {
     return this.httpRequest.post(this.API_URL + 'add_users', data);
   }
 
   DeleteDataFromAPI(id: any) {
-    return this.httpRequest.delete(this.API_URL + 'api/delete_users/' + id,{
-      headers:this.header
+    return this.httpRequest.delete(this.API_URL + 'api/delete_users/' + id, {
+      headers: this.header
     });
   }
 
   GetEditDataFromAPI(id: any) {
-    return this.httpRequest.get(this.API_URL + 'api/edit_users/' + id,{
-      headers:this.header
+    return this.httpRequest.get(this.API_URL + 'api/edit_users/' + id, {
+      headers: this.header
     });
   }
 
   UpdateDataFromAPI(id: any, data: any) {
-    return this.httpRequest.patch(this.API_URL + 'api/update_users/' + id, data,{
-      headers:this.header
+    return this.httpRequest.patch(this.API_URL + 'api/update_users/' + id, data, {
+      headers: this.header
     });
   }
 
@@ -67,5 +85,11 @@ export class UserDataService {
 
   LoginDataFromAPI(data: any) {
     return this.httpRequest.post(this.API_URL + 'api/login', data);
+  }
+
+  LogoutDataFromAPI(token: any) {
+    return this.httpRequest.get(this.API_URL + 'api/logout/' + token, {
+      headers: this.header
+    });
   }
 }

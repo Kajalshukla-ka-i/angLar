@@ -3,5 +3,6 @@ export class Users {
     public class :any;
     public email:any;
     public contact:any;
+    public search:any;
 
 }

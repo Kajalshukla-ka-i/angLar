@@ -24,13 +24,13 @@ Route::post('/login', [ApiController::class, 'login']);
 Route::post('register', [ApiController::class, 'register']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::get('logout', [ApiController::class, 'logout']);
+    Route::get('logout/{token}', [ApiController::class, 'logout']);
     Route::get('user', [ApiController::class, 'get_user']);
-
-    Route::get('users_vew',[StudentController::class,'getDta']);
+    Route::post('student', [StudentController::class, 'getData']);
+    Route::get('users_vew', [StudentController::class, 'getDta']);
     // Route::post('add_users',[UsersController::class,'addDta']);
-    Route::delete(('delete_users/{id}'),[StudentController::class,'deleteDta']);
-    
+    Route::delete(('delete_users/{id}'), [StudentController::class, 'deleteDta']);
+
     // to edit
     Route::get(('edit_users/{id}'), [StudentController::class, 'editDta']);
     Route::patch(('update_users/{id}'), [StudentController::class, 'updateDta']); // end

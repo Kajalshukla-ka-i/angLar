@@ -19,12 +19,24 @@ class Student extends Model
         'contact'
     ];
 
-    public function getStudent()
+    public function getStudent($search)
     {
-        $users = DB::table('users')
-            ->join('students', 'students.user_id', '=', 'users.id')
-            ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
-            ->get();
+        if ($search != '') {
+            $users = DB::table('users')
+                ->join('students', 'students.user_id', '=', 'users.id')
+                ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                ->where('users.name', 'like', "%$search%")
+                ->orWhere('users.email', 'like', "%$search%")
+                ->orWhere('students.class', 'like', "%$search%")
+                ->orWhere('students.contact', 'like', "%$search%")
+                ->orWhere('students.email', 'like', "%$search%")
+                ->get();
+        } else {
+            $users = DB::table('users')
+                ->join('students', 'students.user_id', '=', 'users.id')
+                ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                ->get();
+        }
 
         return $users;
     }
@@ -66,7 +78,7 @@ class Student extends Model
     {
         $result1 = DB::table('users')->where('id', $id)->delete();
         $result2 = DB::table('students')->where('user_id', $id)->delete();
-        if($result1 && $result2){
+        if ($result1 && $result2) {
             return true;
         }
         // return $result;
