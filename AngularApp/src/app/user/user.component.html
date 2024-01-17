@@ -16,7 +16,8 @@
         <div class="col-md-12">
 
             <div class="search-hero">
-                <input class="form-control" type="text" name="search" [(ngModel)]="userobj.search" autocomplete="off" placeholder="search ...">
+                <input class="form-control" type="text" name="search" [(ngModel)]="userobj.search" autocomplete="off"
+                    placeholder="search ...">
                 <button class="btn btn-primary" style="margin-left: 10px;" (click)="searchUser()">Search</button>
 
             </div>
@@ -46,5 +47,8 @@
                 </tbody>
             </table>
         </div>
+        <!-- <p>Default pagination:</p>
+        <ngb-pagination [collectionSize]="70"  aria-label="Default pagination" /> -->
+
     </div>
 </div>

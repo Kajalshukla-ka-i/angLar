@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
   api_value: any;
   target: string = '';
   userobj = new Users()
+// page: number;
   constructor(private userdata: UserDataService, private spinner: NgxSpinnerService, private route: Router) { }
 
   ngOnInit(): void {

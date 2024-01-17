@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   // ... your other routes
@@ -35,7 +36,8 @@ const routes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgbModule
 
   ],
   providers: [AuthGuard],
