@@ -19,7 +19,72 @@ class Student extends Model
         'contact'
     ];
 
-    public function getStudent($search)
+    public function getStudent($search, $limit, $skip, $sort_value, $sort_order)
+    {
+        if ($search != '') {
+
+            if (!empty($sort_value) && !empty($sort_order)) {
+                $users = DB::table('users')
+                    ->join('students', 'students.user_id', '=', 'users.id')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->where('users.name', 'like', "%$search%")
+                    ->orWhere('users.email', 'like', "%$search%")
+                    ->orWhere('students.class', 'like', "%$search%")
+                    ->orWhere('students.contact', 'like', "%$search%")
+                    ->orWhere('students.email', 'like', "%$search%")
+                    ->limit($limit)
+                    ->offset($skip)
+                    ->orderBy("$sort_value", "$sort_order")
+                    ->get();
+            } else {
+                $users = DB::table('users')
+                    ->join('students', 'students.user_id', '=', 'users.id')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->limit($limit)
+                    ->offset($skip)
+                    ->orderBy('name', 'desc')
+                    ->get();
+            }
+            // $users = DB::table('users')
+            //     ->join('students', 'students.user_id', '=', 'users.id')
+            //     ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+            //     ->where('users.name', 'like', "%$search%")
+            //     ->orWhere('users.email', 'like', "%$search%")
+            //     ->orWhere('students.class', 'like', "%$search%")
+            //     ->orWhere('students.contact', 'like', "%$search%")
+            //     ->orWhere('students.email', 'like', "%$search%")
+            //     ->limit($limit)
+            //     ->offset($skip)
+            //     ->orderBy("$sort_value", "$sort_order")
+            //     ->get();
+        } else {
+            if (!empty($sort_value) && !empty($sort_order)) {
+                $users = DB::table('users')
+                    ->join('students', 'students.user_id', '=', 'users.id')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->where('users.name', 'like', "%$search%")
+                    ->orWhere('users.email', 'like', "%$search%")
+                    ->orWhere('students.class', 'like', "%$search%")
+                    ->orWhere('students.contact', 'like', "%$search%")
+                    ->orWhere('students.email', 'like', "%$search%")
+                    ->limit($limit)
+                    ->offset($skip)
+                    ->orderBy("$sort_value", "$sort_order")
+                    ->get();
+            } else {
+                $users = DB::table('users')
+                    ->join('students', 'students.user_id', '=', 'users.id')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->limit($limit)
+                    ->offset($skip)
+                    ->get();
+            }
+        }
+
+        return $users;
+    }
+
+    public function getStudentCount($search, $limit, $skip)
     {
         if ($search != '') {
             $users = DB::table('users')
@@ -30,17 +95,20 @@ class Student extends Model
                 ->orWhere('students.class', 'like', "%$search%")
                 ->orWhere('students.contact', 'like', "%$search%")
                 ->orWhere('students.email', 'like', "%$search%")
-                ->get();
+                // ->limit($limit)
+                // ->offset($skip)
+                ->get()->count();
         } else {
             $users = DB::table('users')
                 ->join('students', 'students.user_id', '=', 'users.id')
                 ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
-                ->get();
+                // ->limit($limit)
+                // ->offset($skip)
+                ->get()->count();
         }
 
         return $users;
     }
-
     public function geteditStudent($id)
     {
         $result =  DB::table('users')

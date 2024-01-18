@@ -52,9 +52,19 @@ class StudentController extends Controller
     public function getData(Request $req)
     {
         $search = $req->search;
+        $limit = $req->limit;
+        $skip = $req->skip;
+        $sort_value =  $req->sort_value;
+        $sort_order =  $req->sort_order;
+
         $studentModel = new student();
-        $data = $studentModel->getStudent($search);
-        return response()->json($data);
+        $data = $studentModel->getStudent($search, $limit, $skip, $sort_value,$sort_order);
+        $dataCount = $studentModel->getStudentCount($search, $limit, $skip , $sort_value, $sort_order);
+        $response = array(
+            'data' =>  $data,
+            'count' => $dataCount
+        );
+        return response()->json($response);
         // $usersview = $student->getStudent();
         // return $usersview;
     }

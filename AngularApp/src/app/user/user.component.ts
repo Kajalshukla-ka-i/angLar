@@ -15,7 +15,18 @@ export class UserComponent implements OnInit {
   api_value: any;
   target: string = '';
   userobj = new Users()
-// page: number;
+  page: number = 1;
+  limit:number = 5; // to show total number of value by default
+  skip:number = 0;
+  studentResult:any;
+  collectionSize:number = 0;
+
+
+  // sorting
+  classnamesort:string='fa fa-sort';
+  sortValue:any='';
+  prevValue:any='';
+  sortOder:string = '';
   constructor(private userdata: UserDataService, private spinner: NgxSpinnerService, private route: Router) { }
 
   ngOnInit(): void {
@@ -26,14 +37,35 @@ export class UserComponent implements OnInit {
   }
 
   showAPIDATA() {
-    this.userdata.getDataFromAPI(this.userobj).subscribe(res => {
+
+    console.log("page value : ", this.page);
+    if (this.page == 1) {
+      this.skip = 0;
+    } else {
+      this.skip = (this.page - 1) * this.limit;
+    }
+
+    var reqObject = {
+      'limit': this.limit,
+      'skip': this.skip,
+      'search ': this.userobj.search,
+      'sort_value':this.sortValue,
+      'sort_order' : this.sortOder
+    }
+    this.userdata.getDataFromAPI(reqObject).subscribe(res => {
       console.log(res);
-      this.api_value = res;
+      this.studentResult = res;
+      this.api_value =this.studentResult.data;
+      this.collectionSize = this.studentResult.count;
+
     })
 
     this.userdata.getFromAPI().subscribe(res => {
       console.log(res);
       this.api_value = res;
+      // this.studentResult = res;
+      this.api_value =this.studentResult.data;
+      this.collectionSize = this.studentResult.count;
     })
   }
 
@@ -110,7 +142,30 @@ export class UserComponent implements OnInit {
 
   }
 
-  searchUser(){
+  searchUser() {
+    this.showAPIDATA();
+  }
+
+  setPageLength(){
+    this.limit = this.userobj.pageLength;
+    console.log('page Length  ' + this.limit);
+    this.showAPIDATA();
+  }
+
+  orderByMe(x:any){
+    if(this.prevValue == x){
+
+      // descending order
+      this.sortOder = 'desc';
+      this.sortValue = x,
+      this.prevValue = "";
+
+    }else{
+      // ascending
+      this.sortOder = 'asc';
+      this.sortValue = x,
+      this.prevValue = "";
+    }
     this.showAPIDATA();
   }
 }

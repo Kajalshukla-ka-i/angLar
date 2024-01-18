@@ -3,3 +3,8 @@
     display: flex;
     float: right;
 }
+
+.list-pagination{
+    float: right;
+    margin-top: 20px;
+}

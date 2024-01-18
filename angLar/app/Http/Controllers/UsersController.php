@@ -4,30 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
     //
-    public function show(){
+    public function show()
+    {
         return 'Hi users';
     }
 
-    public function getDta(){
+    public function getDta()
+    {
         $users = new student();
         $usersview = $users->getStudent();
         return $usersview;
-
     }
-    public function addDta(Request $req){
+    public function addDta(Request $req)
+    {
         // dd($req);
         $mess = array();
         $users = new student();
         $result = $users->addStudent($req->all());
         // return $usersview;
-        if($result){
+        if ($result) {
             $mess['code'] = 1;
             $mess['message'] = 'Details Submit Successfully !';
-        }else{
+        } else {
             $mess['code'] = 2;
             $mess['message'] = 'Error While saving Please Try Again !';
         }
@@ -36,17 +39,18 @@ class UsersController extends Controller
         // dd($usersview);
 
     }
-    public function deleteDta(Request $req){
+    public function deleteDta(Request $req)
+    {
         // dd($req);
-        $id=$req->id;
+        $id = $req->id;
         $mess = array();
         $users = new student();
         $result = $users->deleteStudent($id);
         // return $usersview;
-        if($result){
+        if ($result) {
             $mess['code'] = 1;
             $mess['message'] = 'Details Deleted Successfully !';
-        }else{
+        } else {
             $mess['code'] = 2;
             $mess['message'] = 'Error While deleting Please Try Again !';
         }
@@ -56,7 +60,8 @@ class UsersController extends Controller
 
     }
 
-    public function editDta(Request $req){
+    public function editDta(Request $req)
+    {
         $users = new student();
         $id = $req->id;
         $usersview = $users->geteditStudent($id);
@@ -64,17 +69,18 @@ class UsersController extends Controller
         return response()->json($usersview);
     }
 
-    public function updateDta(Request $req){
+    public function updateDta(Request $req)
+    {
         // dd($req);
         $mess = array();
         $id = $req->id;
         $users = new student();
-        $result = $users->updateStudent($id,$req->all());
+        $result = $users->updateStudent($id, $req->all());
         // return $usersview;
-        if($result){
+        if ($result) {
             $mess['code'] = 1;
             $mess['message'] = 'Details Updated Successfully !';
-        }else{
+        } else {
             $mess['code'] = 2;
             $mess['message'] = 'Error While updating Please Try Again !';
         }
@@ -84,5 +90,13 @@ class UsersController extends Controller
 
     }
 
+    public function basic_email()
+    {
+        $data = array('name' => "KS", "email" => "suryavanshi.kj@gmail.com", "contact" => '7779637815');
+        Mail::send('templates.register_email', $data, function ($message) {
+            $message->to('erkajalshukla@gmail.com', 'Kajal Shukla')->subject('Laravel Mail sending');
+            $message->from('suryavanshi.kj@gmail.com', 'Kajal Shukla');
+        });
+        echo "Mail send,  Kindly Check your Mail";
+    }
 }
-

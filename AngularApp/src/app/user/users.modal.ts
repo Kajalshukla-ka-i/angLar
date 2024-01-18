@@ -4,5 +4,6 @@ export class Users {
     public email:any;
     public contact:any;
     public search:any;
+    public pageLength:number=5;
 
 }

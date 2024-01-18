@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 // use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator; //as FacadesValidator;
 // use Illuminate\Validation\Validator;
@@ -47,10 +49,17 @@ class ApiController extends Controller
             ]);
 
             if ($student) {
+
+                $data = array('name' => $req->name, "email" => $req->email, "contact" => $req->contact);
+                Mail::send('templates.register_email', $data, function ($message) {
+                    $message->to('erkajalshukla@gmail.com', 'Kajal Shukla')->subject('Laravel Mail sending');
+                    $message->from('suryavanshi.kj@gmail.com', 'Kajal Shukla');
+                });
+                // echo "Mail send,  Kindly Check your Mail";
                 return response()->json([
                     'success' => true,
                     'code' => 1,
-                    'message' => 'Users Created Successfully',
+                    'message' => 'Users Created Successfully & Mail send successfully',
                     'data' => $user
                 ], Response::HTTP_OK);
             }

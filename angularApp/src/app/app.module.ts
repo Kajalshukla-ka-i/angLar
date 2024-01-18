@@ -37,8 +37,9 @@ const routes: Routes = [
     BrowserAnimationsModule,
     NgxSpinnerModule,
     RouterModule.forRoot(routes),
-    NgbModule
-
+    NgbModule,
+    
+  
   ],
   providers: [AuthGuard],
   exports: [RouterModule],
