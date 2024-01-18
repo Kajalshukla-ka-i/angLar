@@ -54,7 +54,7 @@ class ApiController extends Controller
                 'profile_image' => $orginal_name,
                 // 'password' => bcrypt($req->password) 
             ]);
-
+            
             if ($student) {
 
                 $data = array('name' => $req->name, "email" => $req->email, "contact" => $req->contact);

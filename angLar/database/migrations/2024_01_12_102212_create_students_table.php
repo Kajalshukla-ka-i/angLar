@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('email');
             $table->timestamps();
+            $table->longText('profile_image')->change();
 
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
