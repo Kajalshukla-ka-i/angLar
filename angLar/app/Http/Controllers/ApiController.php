@@ -21,6 +21,12 @@ class ApiController extends Controller
     public function register(Request $req)
     {
         $data = $req->only('name', 'email', 'password', 'class', 'contact');
+
+        $pro_pic = $req->file('file');
+        $uploadPath = "images/profile";
+        $orginal_name =  $pro_pic->getClientOriginalName();
+        $pro_pic->move($uploadPath, $orginal_name);
+
         $validator =  Validator::make($data, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -45,6 +51,7 @@ class ApiController extends Controller
                 'email' => $req->email,
                 'class' => $req->class,
                 'contact' => $req->contact,
+                'profile_image' => $orginal_name,
                 // 'password' => bcrypt($req->password) 
             ]);
 

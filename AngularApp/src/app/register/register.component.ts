@@ -3,6 +3,7 @@ import { Register } from './register.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserDataService } from '../services/user-data.service';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +24,8 @@ export class RegisterComponent {
   //   console.log(this.registerobj);
   // }
 
+
+
   register_data() {
     // console.log(this.userobj);
     this.spinner.show();
@@ -33,7 +36,17 @@ export class RegisterComponent {
       }, 1000);
       return;
     }
-    this.userdata.RegisterDataFromAPI(this.registerobj).subscribe((response: any) => {
+
+    var formdata = new FormData();
+    formdata.append("file", this.file, this.file.name);
+    formdata.append("email", this.registerobj.email);
+    formdata.append("name", this.registerobj.name);
+    formdata.append("password", this.registerobj.password);
+    formdata.append("class", this.registerobj.class);
+    formdata.append("contact", this.registerobj.contact);
+
+
+    this.userdata.RegisterDataFromAPI(formdata).subscribe((response: any) => {
       setTimeout(() => {
         this.spinner.hide();
       }, 1000);
@@ -62,9 +75,9 @@ export class RegisterComponent {
       this.show_password = false;
     }
   }
-  imageUpload(event:any){
+  imageUpload(event: any) {
     // console.log( event);
-    this.file= event.target.files[0];
+    this.file = event.target.files[0];
     console.log(this.file);
   }
 }
