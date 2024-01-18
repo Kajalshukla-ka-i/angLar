@@ -47,11 +47,13 @@
                 </div>
                 <span *ngIf="registerPassword.invalid && registerPassword.touched && !userForm.submitted" style="color: red;">Please
                     Enter a Valid Password</span>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <div class="mb-3">
+                    <label class="form-check-label" for="exampleprofile">Upload Profile Pic</label>
+                    <input type="file" class="form-control" id="exampleprofile" (change)="imageUpload($event)">
+
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <span class="login-info" title="Click to Login"> Already have an account, <a href="/login">Login</a></span>
             </div>
         </div>
     </form>

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  file: any;
 
   constructor(private spinner: NgxSpinnerService, private userdata: UserDataService, private route: Router) { }
   registerobj = new Register();
@@ -61,5 +62,9 @@ export class RegisterComponent {
       this.show_password = false;
     }
   }
-
+  imageUpload(event:any){
+    // console.log( event);
+    this.file= event.target.files[0];
+    console.log(this.file);
+  }
 }
