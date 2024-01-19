@@ -21,7 +21,7 @@
                 <div class="mb-3">
                     <label for="inputClass4" class="form-label">Contact</label>
                     <input type="text" class="form-control" #registerContact="ngModel" name="contact"
-                        [(ngModel)]="registerobj.contact" required pattern="[0-9]+$">
+                        [(ngModel)]="registerobj.contact" required pattern="[0-9]+$" minlength="10">
                 </div>
                 <span *ngIf="registerContact.invalid && registerContact.touched && !userForm.submitted"
                     style="color: red;">Please
@@ -29,11 +29,11 @@
                 <div class="mb-3">
                     <label for="inputClass4" class="form-label">Class</label>
                     <input type="text" class="form-control" #registerClass="ngModel" name="class"
-                        [(ngModel)]="registerobj.class" required pattern="[0-9]+$">
+                        [(ngModel)]="registerobj.class" required pattern="[0-9]+$" >
                 </div>
                 <span *ngIf="registerClass.invalid && registerClass.touched && !userForm.submitted"
                     style="color: red;">Please
-                    Enter a Valid Class</span>
+                    Enter a Valid Class</span> 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                     <input type="email" class="form-control" aria-describedby="emailHelp" name="email"
