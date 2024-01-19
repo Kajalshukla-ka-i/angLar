@@ -5,7 +5,8 @@ export class Users {
     public contact:any;
     public search:any;
     public pageLength:number=5;
+    public profile:any;
 
-    
+
 
 }

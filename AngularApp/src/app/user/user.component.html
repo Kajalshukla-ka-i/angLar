@@ -43,6 +43,7 @@
                         <th (click)="orderByMe('class')">Class <i [ngClass]="classnamesort"></i> </th>
                         <th (click)="orderByMe('email')">Email <i [ngClass]="classnamesort"></i>  </th>
                         <th (click)="orderByMe('contact')">Contact  <i [ngClass]="classnamesort"></i> </th>
+                        <!-- <th>Profile</th> -->
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -53,6 +54,7 @@
                         <td>{{st.class}}</td>
                         <td>{{st.email}}</td>
                         <td>{{st.contact}}</td>
+                        <!-- <td>{{st.profile_image}}</td> -->
                         <td>
                             <button class="btn btn-danger" (click)="delete_data(st.id)">Delete</button>
                             <button class="btn btn-primary mx-2" routerLink="edit/{{st.id}}">Edit</button>

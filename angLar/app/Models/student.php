@@ -30,7 +30,7 @@ class Student extends Model
             if (!empty($sort_value) && !empty($sort_order)) {
                 $users = DB::table('users')
                     ->join('students', 'students.user_id', '=', 'users.id')
-                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
                     ->where('users.name', 'like', "%$search%")
                     ->orWhere('users.email', 'like', "%$search%")
                     ->orWhere('students.class', 'like', "%$search%")
@@ -43,7 +43,7 @@ class Student extends Model
             } else {
                 $users = DB::table('users')
                     ->join('students', 'students.user_id', '=', 'users.id')
-                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
                     ->limit($limit)
                     ->offset($skip)
                     ->orderBy('name', 'desc')
@@ -65,7 +65,7 @@ class Student extends Model
             if (!empty($sort_value) && !empty($sort_order)) {
                 $users = DB::table('users')
                     ->join('students', 'students.user_id', '=', 'users.id')
-                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
                     ->where('users.name', 'like', "%$search%")
                     ->orWhere('users.email', 'like', "%$search%")
                     ->orWhere('students.class', 'like', "%$search%")
@@ -78,7 +78,7 @@ class Student extends Model
             } else {
                 $users = DB::table('users')
                     ->join('students', 'students.user_id', '=', 'users.id')
-                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                    ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
                     ->limit($limit)
                     ->offset($skip)
                     ->get();
@@ -93,7 +93,7 @@ class Student extends Model
         if ($search != '') {
             $users = DB::table('users')
                 ->join('students', 'students.user_id', '=', 'users.id')
-                ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
                 ->where('users.name', 'like', "%$search%")
                 ->orWhere('users.email', 'like', "%$search%")
                 ->orWhere('students.class', 'like', "%$search%")
@@ -105,7 +105,7 @@ class Student extends Model
         } else {
             $users = DB::table('users')
                 ->join('students', 'students.user_id', '=', 'users.id')
-                ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+                ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
                 // ->limit($limit)
                 // ->offset($skip)
                 ->get()->count();
@@ -117,7 +117,7 @@ class Student extends Model
     {
         $result =  DB::table('users')
             ->join('students', 'students.user_id', '=', 'users.id')
-            ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact')
+            ->select('users.name', 'users.email', 'users.id', 'students.class', 'students.contact','students.profile_image')
             ->where('users.id', $id)
             ->get()->first();
         return $result;
