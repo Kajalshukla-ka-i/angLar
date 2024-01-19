@@ -19,14 +19,14 @@
                 <span *ngIf="userClass.invalid && userClass.touched && !userForm.submitted" style="color: red;">Please
                     Enter a Valid
                     Class</span>
-                    <div class="col-md-4">
-                        <label for="inputClass4" class="form-label">Contact</label>
-                        <input type="text" class="form-control" #userClass="ngModel" name="Contact"
-                            [(ngModel)]="userobj.contact" required pattern="[0-9]+$">
-                    </div>
-                    <span *ngIf="userClass.invalid && userClass.touched && !userForm.submitted" style="color: red;">Please
-                        Enter a Valid
-                        Class</span>
+                <div class="col-md-4">
+                    <label for="inputClass4" class="form-label">Contact</label>
+                    <input type="text" class="form-control" #userClass="ngModel" name="Contact"
+                        [(ngModel)]="userobj.contact" required pattern="[0-9]+$">
+                </div>
+                <span *ngIf="userClass.invalid && userClass.touched && !userForm.submitted" style="color: red;">Please
+                    Enter a Valid
+                    Class</span>
                 <div class="col-md-4">
                     <label for="inputEmail4" class="form-label">Email</label>
                     <input type="email" class="form-control" #userEmail="ngModel" name="email"
@@ -36,10 +36,73 @@
                     Enter a Valid
                     Email</span>
 
-                <div class="col-md-4" style="float: right; margin-top: -11px;">
-                    <button type="submit" style="margin-top: -88px;" class="btn btn-primary">Update Student</button>
+                <div class="col-md-8 mx-2">
+
+                    <!-- <div style="margin-top: 11px;">
+                        <button type="button" class="btn btn-outline-primary mx-2" (click)="isCollapsed = !isCollapsed"
+                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                            Add Additional Details
+                        </button>
+                    </div>
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="mx-2">
+                        <div class="card">
+                            <div class="card-body">You can collapse this card by clicking one Toggle button
+
+                                <div class="mb-3 mt-3">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control" placeholder="Subject Name ...."
+                                                name="Subject" [(ngModel)]="studentDetails.subject">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder="Score (%)" name="Score"
+                                                [(ngModel)]="studentDetails.Score">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary" type="button" (click)="addItem()">Add
+                                                More</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>-->
+
+
+                                <!-- Add More Functionality -->
+
+                                <!-- <div *ngFor="let item of items; let i = index" class="item-group row mt-2">
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" placeholder="Subject Name ...."
+                                            name="Subject{{i}}" [(ngModel)]="item.subject" required>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Score (%)" name="Score{{i}}"
+                                            [(ngModel)]="item.Score" required>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-danger" type="button" (click)="removeItem(i)">Remove
+                                            </button>
+
+                                    </div>
+                                </div> -->
+
+                                <!-- end -->
+                            <!--- </div>
+                        </div>
+                    </div> -->
                 </div>
+                <div class="mb-5"></div>
+                <!-- <div class="col-md-4" style="float: right; margin-top: -11px;"> -->
+                <button class="btn btn-info mx-2" style="margin-top: -75px;" routerLink="/users">Back</button>
+                <!-- <button type="submit"  class="btn btn-primary mx-2">Update Student</button> -->
+
+                <button type="submit" style="margin-top: -75px;" class="btn btn-primary mx-2">Update Student</button>
+                <!-- </div> -->
             </form>
         </div>
-          </div>
+    </div>
 </div>

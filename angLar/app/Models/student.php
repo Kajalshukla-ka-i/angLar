@@ -20,6 +20,9 @@ class Student extends Model
         'profile_image'
     ];
 
+    public function getStudents(){
+        return DB::table('student')->get();
+    }
     public function getStudent($search, $limit, $skip, $sort_value, $sort_order)
     {
         if ($search != '') {

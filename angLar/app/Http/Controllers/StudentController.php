@@ -45,7 +45,7 @@ class StudentController extends Controller
         $studentModel = new student();
         // $data = $studentModel->getStudent($search);
         // return response()->json($data);
-        $usersview = $studentModel->getStudent();
+        $usersview = $studentModel->getStudents();
         return $usersview;
     }
     

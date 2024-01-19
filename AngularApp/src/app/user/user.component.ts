@@ -60,13 +60,13 @@ export class UserComponent implements OnInit {
 
     })
 
-    this.userdata.getFromAPI().subscribe(res => {
-      console.log(res);
-      this.api_value = res;
-      // this.studentResult = res;
-      this.api_value =this.studentResult.data;
-      this.collectionSize = this.studentResult.count;
-    })
+    // this.userdata.getFromAPI().subscribe(res => {
+    //   console.log(res);
+    //   this.api_value = res;
+    //   // this.studentResult = res;
+    //   this.api_value =this.studentResult.data;
+    //   this.collectionSize = this.studentResult.count;
+    // })
   }
 
   add_Student() {

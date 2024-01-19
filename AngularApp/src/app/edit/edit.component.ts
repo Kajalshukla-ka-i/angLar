@@ -10,12 +10,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  
-id:any;
-userobj = new Users;
-data : any;
-target: string = '';
-  constructor( private route:ActivatedRoute , private userdata: UserDataService, private spinner:NgxSpinnerService){}
+
+  id: any;
+  studentDetails:any=[];
+  userobj = new Users;
+  data: any;
+  target: string = '';
+  public isCollapsed = true;
+
+  items: { subject: string, Score: any }[] = [];
+  constructor(private route: ActivatedRoute, private userdata: UserDataService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
 
@@ -23,7 +27,7 @@ target: string = '';
     this.editDta();
   }
 
-  editDta(){
+  editDta() {
     this.userdata.GetEditDataFromAPI(this.id).subscribe(res => {
       this.data = res;
       this.userobj = this.data;
@@ -33,11 +37,9 @@ target: string = '';
 
   }
 
-  update_Students(){
-
-  }
   update_Student() {
-    // console.log(this.userobj);
+    // console.log(FormData.value);
+    // return FormData;
     this.spinner.show();
     if (this.userobj.name == undefined || this.userobj.class == undefined || this.userobj.email == undefined || this.userobj.contact == undefined) {
       this.target = '<div class="alert alert-danger"> Please Enter the detail !!</div>'
@@ -46,7 +48,7 @@ target: string = '';
       }, 1000);
       return;
     }
-    this.userdata.UpdateDataFromAPI(this.id,this.userobj).subscribe((response: any) => {
+    this.userdata.UpdateDataFromAPI(this.id, this.userobj).subscribe((response: any) => {
       setTimeout(() => {
         this.spinner.hide();
       }, 1000);
@@ -62,5 +64,15 @@ target: string = '';
         this.target = '<div class="alert alert-warning"> ' + response.message + '</div>'
       }
     });
+  }
+
+  addItem() {
+    this.items.push({ subject: '', Score: null });
+  }
+
+  removeItem(index: number) {
+
+    this.items.splice(index, 1);
+
   }
 }
