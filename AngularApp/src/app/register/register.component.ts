@@ -16,7 +16,8 @@ export class RegisterComponent {
   constructor(private spinner: NgxSpinnerService, private userdata: UserDataService, private route: Router) { }
   registerobj = new Register();
   target: string = '';
-  registerData: any
+  registerData: any;
+  imagePreview:any;
   ngOnInit(): void {
   }
 
@@ -78,6 +79,14 @@ export class RegisterComponent {
   imageUpload(event: any) {
     // console.log( event);
     this.file = event.target.files[0];
+    if(this.file){
+      const reader = new FileReader;
+
+      reader.onload = (e:any) =>{
+        this.imagePreview = e.target.result;
+      }
+      reader.readAsDataURL(this.file);
+    }
     console.log(this.file);
   }
 }

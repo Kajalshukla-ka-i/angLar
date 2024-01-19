@@ -11,41 +11,49 @@
                 <h3>Register Form</h3>
                 <div class="mb-3">
                     <label for="exampleInputName1" class="form-label">Name</label>
-                    <input type="text" pattern="[a-zA-Z]+$" class="form-control" name="name" [(ngModel)]="registerobj.name" #registerName="ngModel" required >
+                    <input type="text" pattern="[a-zA-Z]+$" class="form-control" name="name"
+                        [(ngModel)]="registerobj.name" #registerName="ngModel" required>
                     <!-- <div id="NameHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-                <span *ngIf="registerName.invalid && registerName.touched && !userForm.submitted" style="color: red;">Please
+                <span *ngIf="registerName.invalid && registerName.touched && !userForm.submitted"
+                    style="color: red;">Please
                     Enter a Valid Name</span>
                 <div class="mb-3">
                     <label for="inputClass4" class="form-label">Contact</label>
                     <input type="text" class="form-control" #registerContact="ngModel" name="contact"
                         [(ngModel)]="registerobj.contact" required pattern="[0-9]+$">
                 </div>
-                <span *ngIf="registerContact.invalid && registerContact.touched && !userForm.submitted" style="color: red;">Please
+                <span *ngIf="registerContact.invalid && registerContact.touched && !userForm.submitted"
+                    style="color: red;">Please
                     Enter a Valid Contact</span>
                 <div class="mb-3">
                     <label for="inputClass4" class="form-label">Class</label>
                     <input type="text" class="form-control" #registerClass="ngModel" name="class"
                         [(ngModel)]="registerobj.class" required pattern="[0-9]+$">
                 </div>
-                <span *ngIf="registerClass.invalid && registerClass.touched && !userForm.submitted" style="color: red;">Please
+                <span *ngIf="registerClass.invalid && registerClass.touched && !userForm.submitted"
+                    style="color: red;">Please
                     Enter a Valid Class</span>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" aria-describedby="emailHelp"
-                        name="email" [(ngModel)]="registerobj.email" #registerEmail="ngModel" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
+                    <input type="email" class="form-control" aria-describedby="emailHelp" name="email"
+                        [(ngModel)]="registerobj.email" #registerEmail="ngModel" required
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
-                <span *ngIf="registerEmail.invalid && registerEmail.touched && !userForm.submitted" style="color: red;">Please
+                <span *ngIf="registerEmail.invalid && registerEmail.touched && !userForm.submitted"
+                    style="color: red;">Please
                     Enter a Valid Name</span>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input [type]="show_password ? 'text' : 'password'" class="form-control"  name="password"
+                    <input [type]="show_password ? 'text' : 'password'" class="form-control" name="password"
                         [(ngModel)]="registerobj.password" #registerPassword="ngModel" required>
-                        <i  class="fa" [ngClass]="{' fa-eye' : !show_password , ' fa-eye-slash': show_password }" id="eye-icon" (click)="showpasswordchars()"></i>
-                        <!-- <ngb-icon icon="eye"></ngb-icon> -->
+                    <i class="fa" [ngClass]="{' fa-eye' : !show_password , ' fa-eye-slash': show_password }"
+                        id="eye-icon" (click)="showpasswordchars()"></i>
+                    <!-- <ngb-icon icon="eye"></ngb-icon> -->
                 </div>
-                <span *ngIf="registerPassword.invalid && registerPassword.touched && !userForm.submitted" style="color: red;">Please
+                <span *ngIf="registerPassword.invalid && registerPassword.touched && !userForm.submitted"
+                    style="color: red;">Please
                     Enter a Valid Password</span>
                 <div class="mb-3">
                     <label class="form-check-label" for="exampleprofile">Upload Profile Pic</label>
@@ -53,7 +61,16 @@
 
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <span class="login-info" title="Click to Login"> Already have an account, <a href="/login">Login</a></span>
+                <span class="login-info" title="Click to Login"> Already have an account, <a
+                        href="/login">Login</a></span>
+            </div>
+            <div class="col-sm-3">
+                <div style="float: right;">
+
+                    <img [src]="imagePreview" style="width: 300px; margin-top: 400px;" class="img-thumbnail" alt="..."
+                        *ngIf="imagePreview" />
+                </div>
+
             </div>
         </div>
     </form>

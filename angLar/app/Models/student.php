@@ -16,7 +16,8 @@ class Student extends Model
         'user_id',
         'email',
         'class',
-        'contact'
+        'contact',
+        'profile_image'
     ];
 
     public function getStudent($search, $limit, $skip, $sort_value, $sort_order)
