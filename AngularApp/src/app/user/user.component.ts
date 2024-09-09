@@ -109,11 +109,11 @@ export class UserComponent implements OnInit {
         console.log('delete successful');
         this.showAPIDATA();
         console.log(response);
-        if (response.code == 1) {
-          this.target = '<div class="alert alert-success"> ' + response.message + '</div>'
-        } else if (response.code == 2) {
-          this.target = '<div class="alert alert-warning">' + response.message + '</div>'
-        }
+        // if (response.code == 2) {
+        //   this.target = '<div class="alert alert-success"> ' + response.message + '</div>'
+        // } else if (response.code == 1) {
+        //   this.target = '<div class="alert alert-warning">' + response.message + '</div>'
+        // }
       });
     }
 
